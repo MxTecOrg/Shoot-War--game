@@ -41,10 +41,10 @@ Camera = class {
   get y () {return this.layer.y}
   set x (x) {
     let layer = this.layer;
-    if ((x < 0 && x > - layer.w) || this.force) layer.x = x;
+    if ((x < 0 && x > - layer.w + WIDTH) || this.force) layer.x = x;
   }
   set y (y) {
     let layer = this.layer;
-    if ((y < 0 && y > - layer.h) || this.force) layer.y = y;
+    if ((y < 0 && y > - layer.h + HEIGHT) || this.force) layer.y = y;
   }
 };

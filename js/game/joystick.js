@@ -1,26 +1,22 @@
-/* joystick */
-function distance (x1, y1, x2, y2) {
-  return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-}
+/* Class joystick */
 
-function semicircle (x, r) {
-  return Math.sqrt(Math.pow(r,2) - Math.pow(x,2));
-}
-
-
-JoyStick = function (container, options) {
+JoyStick = function (container, options = {}) {
   let self = this;
-  options = options || {};
   
-  container = document.getElementById(container);
+  // canvas
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
   
+  ctx.fillStyle = options.fillStyle || "#000000";
+  ctx.strokeStyle = options.strokeStyle || "#000000";
+  
+  
+  // contantes
   let W = container.clientWidth;
   let H = container.clientHeight;
   let centerX = W / 2;
   let centerY = H / 2;
-  let radio = centerX;
+  let radius = centerX;
   
   canvas.width = W;
   canvas.height = H;
@@ -29,20 +25,21 @@ JoyStick = function (container, options) {
   // joystick posicion
   let joyX = centerX;
   let joyY = centerY;
-  let joyRadio = radio/2;
-  let joyMax = radio - joyRadio;
-  let offsetX = canvas.offsetParent.offsetLeft;
-  let offsetY = canvas.offsetParent.offsetTop;
+  let joyRadius = radius/2;
+  let joyMax = radius - joyRadius;
+  let offsetParent = canvas.offsetParent;
+  let offsetX = offsetParent.offsetLeft;
+  let offsetY = offsetParent.offsetTop;
   
   // eventos
-  canvas.ontouchstart = function () {self.pressed = true};
-  canvas.ontouchmove = function (event) {
+  (options.dinamicArea || canvas).ontouchstart = function () {self.pressed = true};
+  (options.dinamicArea || canvas).ontouchmove = function (event) {
     event = event.targetTouches[0];
     
     let touchX = event.pageX - offsetX;
     let touchY = event.pageY - offsetY;
-    let sideX = touchX - radio;
-    let sideY = touchY - radio;
+    let sideX = touchX - radius;
+    let sideY = touchY - radius;
     let radian = Math.atan2(sideY, sideX);
 
     if (sideX * sideX + sideY * sideY >= joyMax * joyMax) {
@@ -59,19 +56,21 @@ JoyStick = function (container, options) {
     //joyX = touchX > W ? W : touchX < 0 ? 0 : touchX;
     //joyY = touchY > H ? H : touchY < 0 ? 0 : touchY;
     
-    joyX += radio;
-    joyY += radio;
+    joyX += radius;
+    joyY += radius;
     
     let x = (joyX - centerX) / joyMax;
     let y = (joyY - centerY) / joyMax;
     
     
-    self.x = x;// > 1 ? 1 : x < -1 ? -1 : x;
-    self.y = y;// > 1 ? 1 : y < -1 ? -1 : y;
-
+    self.x = x;
+    self.y = y;
+    
+    offsetX = offsetParent.offsetLeft;
+    offsetY = offsetParent.offsetTop;
     draw();
   };
-  canvas.ontouchend = function () {
+  (options.dinamicArea || canvas).ontouchend = function () {
     self.pressed = false;
     joyX = centerX;
     joyY = centerY;
@@ -91,20 +90,20 @@ JoyStick = function (container, options) {
     
     // circulo externo
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radio, 0, Math.PI * 2, false);
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "#ff0000";
     ctx.stroke();
     ctx.closePath();
     
     // circulo interno
     ctx.beginPath();
-    ctx.arc(joyX, joyY, radio/2, 0, Math.PI * 2, false);
-    ctx.fillStyle = "#ff0000";
+    ctx.arc(joyX, joyY, radius/2, 0, Math.PI * 2, false);
     ctx.fill();
     ctx.closePath();
   }
   
+  this.container = container;
+  this.canvas = canvas;
   this.x = 0; //joy frac x
   this.y = 0; //joy frac y
   this.pressed = false;

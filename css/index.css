@@ -10,6 +10,10 @@
   --accent-font-lightcolor: #cccccc;
 }
 
+html {
+  overflow: hidden;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -24,14 +28,23 @@
 .joy {
   position: fixed;
   bottom: 0;
-  margin: 20px;
   width: 100px;
   height: 100px;
 }
+
+#joy-left--area {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+}
+
 #joy-left {
   left: 0;
 }
 
 #joy-right {
   right: 0;
+  margin: 20px;
 }

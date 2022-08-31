@@ -10,12 +10,12 @@ let id = 0;
 function createPlayer (texture, options) {
   let pj = new Sprite(texture);
   
-  pj.anchor.set(0.5, 0.5);
+  pj.anchor.set(0.5, 0.7);
   pj.x = options.x;
   pj.y = options.y;
   pj.vx = 0;
   pj.vy = 0;
-  pj.width = options.w;
+  //pj.width = options.w;
   pj.height = options.h;
   pj.id = id + "";
   

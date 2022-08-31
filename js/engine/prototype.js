@@ -1,3 +1,4 @@
+
 Loader = PIXI.Loader.shared,
 Resources = PIXI.Loader.shared.resources,
 Graphics = PIXI.Graphics,

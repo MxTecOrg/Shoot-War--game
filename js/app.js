@@ -15,7 +15,10 @@ app.script = function( url, callback ) {
   let script = document.createElement("script");
   script.setAttribute("type", "text/javascript");
   script.setAttribute("src", url);
-  script.onload = callback;
+  script.onload = function(){
+    console.info("Script \"" + url + "\" loaded!");
+    if (callback) callback();
+  };
   script.onerror =function(e){
     throw "AppError: script \"" + url + "\" not found";
   };
@@ -203,5 +206,5 @@ app.start = function(){
   //app.loading.init();
   //app.wall.init();
   app.isStart = true;
-  if(window.OnStart) OnStart();
+  if(window.OnStart) setTimeout(OnStart, 500);
 };

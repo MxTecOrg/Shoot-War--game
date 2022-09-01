@@ -45,14 +45,18 @@ function OnStart () {
   
   /* (pixi) cargar texturas */
   Loader
+    .add("src/pjs/hero_male_1.json")
     .add("src/pjs/pj.png")
     .add("src/world/ground.png")
+    .add("src/wps/mp5.png")
     .load(OnLoad);
 }
 
 
 /* (event) luego de cargar texturas */
 function OnLoad () {
+  Resources["src/pjs/hero_male_1.json"] = new TextureList(Resources["src/pjs/hero_male_1.json"].textures);
+  
   gameLayer = pixi.stage;
   world = { //datos del mundo
     width: 1000,
@@ -73,7 +77,8 @@ function OnLoad () {
   
   setControls();
   
-  player = createPlayer(Resources["src/pjs/pj.png"].texture, {
+  // jugador
+  player = createPlayer(Resources["src/pjs/hero_male_1.json"].textures, {
     x: 0,
     y: 0,
     w: 80,
@@ -81,5 +86,12 @@ function OnLoad () {
   });
   player.speed = 1;
   
+  
+  boxDebug = new PIXI.Text("");
+  boxDebug.x = WIDTH/2;
+  boxDebug.y = 0;
+  layer2.addChild(boxDebug);
+  
+  // iniciar bucle
   pixi.ticker.add(OnLoop);
 }

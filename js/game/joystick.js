@@ -1,7 +1,7 @@
 /* Class joystick */
 
 JoyStick = function (container, options = {}) {
-  let self = this;
+  let that = this;
   
   // canvas
   let canvas = document.createElement("canvas");
@@ -32,8 +32,8 @@ JoyStick = function (container, options = {}) {
   let offsetY = offsetParent.offsetTop;
   
   // eventos
-  (options.dinamicArea || canvas).ontouchstart = function () {self.pressed = true};
-  (options.dinamicArea || canvas).ontouchmove = function (event) {
+  (options.dinamicArea || canvas).addEventListener("touchstart", function () {that.pressed = true});
+  (options.dinamicArea || canvas).addEventListener("touchmove", function (event) {
     event = event.targetTouches[0];
     
     let touchX = event.pageX - offsetX;
@@ -63,24 +63,25 @@ JoyStick = function (container, options = {}) {
     let y = (joyY - centerY) / joyMax;
     
     
-    self.x = x;
-    self.y = y;
+    that.x = x;
+    that.y = y;
     
     offsetX = offsetParent.offsetLeft;
     offsetY = offsetParent.offsetTop;
     draw();
-  };
-  (options.dinamicArea || canvas).ontouchend = function () {
-    self.pressed = false;
+  });
+  
+  (options.dinamicArea || canvas).addEventListener("touchend", function () {
+    that.pressed = false;
     joyX = centerX;
     joyY = centerY;
-    self.x = 0;
-    self.y = 0;
+    that.x = 0;
+    that.y = 0;
     draw();
-  };
+  });
   
   function drawLoop () {
-    if (self.pressed) {
+    if (that.pressed) {
       draw();
       window.requestAnimationFrame(drawLoop);
     }
@@ -90,14 +91,14 @@ JoyStick = function (container, options = {}) {
     
     // circulo externo
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, false);
+    ctx.arc(centerX, centerY, radius * 3/4, 0, Math.PI * 2, false);
     ctx.lineWidth = 2;
     ctx.stroke();
     ctx.closePath();
     
     // circulo interno
     ctx.beginPath();
-    ctx.arc(joyX, joyY, radius/2, 0, Math.PI * 2, false);
+    ctx.arc(joyX, joyY, joyRadius, 0, Math.PI * 2, false);
     ctx.fill();
     ctx.closePath();
   }

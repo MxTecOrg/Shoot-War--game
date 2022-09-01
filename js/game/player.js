@@ -7,21 +7,44 @@
   options.h => alto
 */
 let id = 0;
-function createPlayer (texture, options) {
-  let pj = new Sprite(texture);
+function createPlayer (textures, options) {
+  let cont = new Container();
+  let pj = new AnimatedSprite(textures);
+  let wp = new Sprite(Resources["src/wps/mp5.png"].texture);
   
-  pj.anchor.set(0.5, 0.7);
-  pj.x = options.x;
-  pj.y = options.y;
-  pj.vx = 0;
-  pj.vy = 0;
-  //pj.width = options.w;
+  cont.addChild(pj);
+  cont.addChild(wp);
+  
+  // sprite personaje 
+  pj.anchor.set(0.5, 0.5);
+  pj.width = options.w;
   pj.height = options.h;
-  pj.id = id + "";
+  pj.w = options.w;
+  pj.h = options.h;
+  pj.x = pj.width / 2;
+  pj.y = pj.height / 2;
+  pj.animationSpeed = 0.1;
   
-  world.pjs[pj.id] = pj;
-  layer1.addChild(pj);
+  // sprite weapon
+  wp.anchor.set(0.2, 0.5);
+  wp.width = pj.width / 1.2;
+  wp.height = pj.width / 2.2;
+  wp.w = wp.width;
+  wp.h = wp.height;
+  wp.x = pj.width / 2;
+  wp.y = pj.height * 2/3;
+  
+  // contenedor
+  cont.x = options.x;
+  cont.y = options.y;
+  cont.vx = 0;
+  cont.vy = 0;
+  cont.anchor.set(0.5, 0.5);
+  cont.id = id + "";
+  
+  world.pjs[cont.id] = cont;
+  layer1.addChild(cont);
   id++;
 
-  return pj;
+  return cont;
 }

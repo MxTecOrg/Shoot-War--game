@@ -15,6 +15,7 @@ app.script = function( url, callback ) {
   let script = document.createElement("script");
   script.setAttribute("type", "text/javascript");
   script.setAttribute("src", url);
+  script.setAttribute("defer", true);
   script.onload = function(){
     console.info("Script \"" + url + "\" loaded!");
     if (callback) callback();

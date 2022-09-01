@@ -5,4 +5,5 @@ APP_PACKAGE = "";
 
 
 GAME_RESOLUTION = 1;
+FORCE_CANVAS = false;
 TEST_ENABLED = true;

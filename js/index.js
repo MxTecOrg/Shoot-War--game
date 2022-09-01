@@ -1,15 +1,3 @@
-if (TEST_ENABLED) app.script("libs/eruda.js", function(){eruda.init()});
-
-app.css("css/index.css");
-app.script("libs/pixi.js");
-app.script("libs/bump.js");
-app.script("js/game/joystick.js");
-app.script("js/engine/prototype.js");
-app.script("js/engine/loop.js");
-
-app.script("js/game/world.js");
-app.script("js/game/controls.js");
-app.script("js/game/player.js");
 
 /* (event) inicializar */
 function OnStart () {
@@ -30,8 +18,9 @@ function OnStart () {
     width: app.width,
     height: app.height,
     transparent: false,
-    forceCanvas: true,
-    view: dom.getElementById("game-view"),
+    view: document.getElementById("game-view"),
+    
+    forceCanvas: FORCE_CANVAS,
     resolution: GAME_RESOLUTION
   });
   renderer = pixi.renderer;

@@ -10,12 +10,25 @@
 </head>
 
 <body onload="app.start()">
-  <canvas id="game-view"></canvas>
   
-  <div id="joy-left--area">
-    <div id="joy-left" class="joy"></div>
+  <!-- Pantalla Menú principal -->
+  <div id="main-screen" class="screen">
+    <!--Botones-->
+    <div class="main--btn" onclick="GameScreen.open()"> JUEGO </div>
+    <div class="main--btn"> AJUSTE </div>
+    <div class="main--btn"> ACERCA DE </div>
   </div>
-  <div id="joy-right" class="joy"></div>
+  
+  <!-- Pantalla de juego -->
+  <div id="game-screen" class="screen">
+    <canvas id="game-view"></canvas>
+  
+    <div id="joy-left--area">
+      <div id="joy-left" class="joy"></div>
+    </div>
+    <div id="joy-right" class="joy"></div>
+  </div>
+  
 </body>
 
 </html>

@@ -95,7 +95,7 @@ app.animate = function(draw, duration, timing) {
 // debug //
 app.debug = function(title, txt){
   if(txt) title += "  ➤";
-  else { txt = title; title = "" }
+  else txt = title, title = "";
   title = title
      .replace(/\-\-\>/, "➔")
      .replace(/\-\>/, "↦");
@@ -124,17 +124,18 @@ app.loading = {
   },
   
   show: function(s = "") {
-    app.loading.last_screen = app.screen; //XChat only!
-    app.screen = {close:function(){}}; //XChat only!
-    
-    let lay = this.layout;
     this.content.innerText = s;
-    lay.style.filter = "opacity(0)";
-    lay.style.display = "flex";
-    app.animate(function(porc){
-      lay.style.filter = "opacity(" + porc + ")";
-      lay.style.transform = "scale(" + (1.5 - 0.5 * porc ) + ")";
-    }, 500).start();
+    
+    if (!this.showing) {
+      let lay = this.layout;
+      lay.style.filter = "opacity(0)";
+      lay.style.display = "flex";
+      app.animate(function(porc){
+        lay.style.filter = "opacity(" + porc + ")";
+        lay.style.transform = "scale(" + (1.5 - 0.5 * porc ) + ")";
+      }, 500).start();
+      this.showing = true;
+    }
   },
   
   hidden: function(){
@@ -143,11 +144,9 @@ app.loading = {
       lay.style.filter = "opacity(" + (1 - porc) + ")";
       lay.style.transform = "scale(" + (1.5 - 0.5 * (1 - porc) ) + ")";
     }, 200)
-      .finish( function(){ 
-        lay.style.display = "none";
-        app.screen = app.loading.last_screen; //XChat only!
-      } )
+      .on("finish", function(){lay.style.display = "none"})
       .start();
+    this.showing = false;
   }
 };
 
@@ -202,9 +201,10 @@ app.alert = function (txt, callback) {
 // app init //
 app.start = function(){
   dom = document;
-  dom.head = dom.getElementsByTagName("head")[0];
-  dom.body = dom.getElementsByTagName("body")[0];
-  //app.loading.init();
+  document.head = document.getElementsByTagName("head")[0];
+  document.body = document.getElementsByTagName("body")[0];
+  app.loading.init();
+  loading = app.loading;
   //app.wall.init();
   app.isStart = true;
   if(window.OnStart) setTimeout(OnStart, 500);

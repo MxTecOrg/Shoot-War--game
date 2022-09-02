@@ -1,6 +1,6 @@
 
 /* (evento) al cargar pixi */
-function OnLoadPixi () {
+function OnLoadPIXI () {
   Loader = PIXI.Loader.shared,
   Resources = PIXI.Loader.shared.resources,
   Graphics = PIXI.Graphics,

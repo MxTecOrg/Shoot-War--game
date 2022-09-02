@@ -5,8 +5,8 @@ function OnLoop (delay) {
   // lógica de jugadores
   for (let pj_id in world.pjs) {
     let pj = world.pjs[pj_id];
-    let pj_sprite = pj.children[0]; //personaje
-    let wp_sprite = pj.children[1]; //arma
+    let pj_sprite = pj.getChildByName("character"); //personaje
+    let wp_sprite = pj.getChildByName("weapon"); //arma
    
     let watchX, watchY; //direccion en la que observa
    
@@ -66,8 +66,8 @@ function OnLoop (delay) {
       
       
       // caminar
-      let mx = pj.x + pj.vx * delay; // nueva posicion X
-      let my = pj.y + pj.vy * delay; // nueva posicion Y
+      let mx = pj.x + scalePixel(pj.vx * delay); // nueva posicion X
+      let my = pj.y + scalePixel(pj.vy * delay); // nueva posicion Y
     
       let collide = worldCollide(mx, my);
       if (!collide.x) pj.x = mx;

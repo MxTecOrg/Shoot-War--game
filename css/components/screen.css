@@ -1,0 +1,12 @@
+/* pantallas */
+
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--accent-color);
+}
+

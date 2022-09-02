@@ -1,0 +1,35 @@
+/* Layout de Menú */
+#main-screen {
+  z-index: 11;
+  background-image: url("/src/main/bg-menu.png");
+  margin: 0px;
+  background-size: 100% 100%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+#main-screen > .main--btn {
+  width: 20vw;
+  height: 4px;
+  background: #6F808C ;
+  padding: 4vw;
+  margin: 1px;
+  border-radius:0 0 10px 10px;
+  font-family: monospace;
+  transition: 0.7s all;
+  font-size: 1rem;
+  text-align: end;
+  color:#FFEE61;
+  border: 7px outset #585A65;
+}
+
+#main-screen > .main--btn:hover{
+  box-shadow: 10px 10px black ;
+  opacity: .6;
+  text-shadow: 5px 5px 4px grey;
+  border: 1px inset #64737E;
+  outline: 2px blue;
+}

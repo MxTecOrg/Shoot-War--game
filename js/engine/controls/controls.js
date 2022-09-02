@@ -1,13 +1,13 @@
 /* controles */
 function setControls () {
-  let area = dom.getElementById("joy-left--area");
+  let area = document.getElementById("joy-left--area");
   
-  joyLeft = new JoyStick(dom.getElementById("joy-left"), {
+  joyLeft = new JoyStick(document.getElementById("joy-left"), {
     fillStyle: "#000000",
     strokeStyle: "#000000",
     dinamicArea: area
   });
-  joyRight = new JoyStick(dom.getElementById("joy-right"), {
+  joyRight = new JoyStick(document.getElementById("joy-right"), {
     fillStyle: "#000000",
     strokeStyle: "#000000"
   });

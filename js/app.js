@@ -173,17 +173,17 @@ app.wall = {
 
 
 // database //
-app.save_data = function(place, data) {
-  localStorage.setItem(place, JSON.stringify({d: data}));
+app.saveData = function(place, data) {
+  localStorage.setItem(place, JSON.stringify({"": data}));
   return data;
 };
-app.load_data = function (place, def) {
+app.loadData = function (place, def) {
   let data = localStorage.getItem(place);
-  if(data) return JSON.parse(data).d;
+  if(data) return JSON.parse(data)[""];
   else return def;
 };
-app.clear_data = function () {localStorage.clear()};
-app.remove_data = function (place) {localStorage.removeItem(place)};
+app.clearData = function () {localStorage.clear()};
+app.removeData = function (place) {localStorage.removeItem(place)};
 
 
 // audio //

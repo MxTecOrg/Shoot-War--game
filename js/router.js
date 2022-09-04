@@ -5,6 +5,7 @@ if (TEST_ENABLED) app.script("libs/eruda.js", function(){eruda.init()});
 app.css("css/index.css");
 app.css("css/components/screen.css");
 app.css("css/components/loading.css");
+app.css("css/components/float.css");
 app.css("css/screen/game-screen.css");
 app.css("css/screen/main-screen.css");
 app.css("libs/font-awesome/css/font-awesome.min.css");
@@ -25,5 +26,6 @@ app.script("js/engine/loop.js");
 app.script("js/engine/world.js");
 app.script("js/engine/controls/joystick.js");
 app.script("js/engine/controls/controls.js");
+app.script("js/engine/controls/admin.js");
 
 app.script("js/index.js");

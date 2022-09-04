@@ -5,6 +5,7 @@ function OnLoadPIXI () {
   Resources = PIXI.Loader.shared.resources,
   Graphics = PIXI.Graphics,
   Texture = PIXI.Texture,
+  Textures = {},
   Rectangle = PIXI.Rectangle,
   Sprite = PIXI.Sprite,
   AnimatedSprite = PIXI.AnimatedSprite,

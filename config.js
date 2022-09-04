@@ -6,7 +6,7 @@ SERVER_URL = "https://quintessential-solid-client.glitch.me";
 TEST_ENABLED = true; // habilitar para depurar
 
 GAME_RESOLUTION = 0.9; // resolución de juego
-FORCE_CANVAS = false; // usar CanvasRenderer
+FORCE_CANVAS = true; // usar CanvasRenderer
 GAME_SCREEN_SIZE = 600; // tamaño de juego
 TILE_SIZE = 50; // tamaño de tile
 

@@ -33,5 +33,6 @@ function Connect () {
   
   socket.on("map-data", OnSocket_MapData);
   socket.on("user-data", OnSocket_UserData);
+  socket.on("new-pj", OnSocket_NewPj);
   socket.on("move", OnSocket_Move);
 }

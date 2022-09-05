@@ -55,16 +55,7 @@ function createGame (data) {
   
   for (let id in data.pjs) {
     let pjs = data.pjs[id];
-    pjs = world.createPlayer(Textures[pjs.t || "hero_male"].textures, {
-      id: pjs.id + "",
-      nickname: pjs.nickname,
-      x: pjs.x,
-      y: pjs.y,
-      w: parseTile(1),
-      h: parseTile(1),
-      speed: pjs.speed || 1
-    });
-    if (USER.nickname == pjs.nickname) player = pjs;
+    OnSocket_NewPj(pjs);
   }
   
   camera = new Camera(layer1, {w:world.width, h:world.height});

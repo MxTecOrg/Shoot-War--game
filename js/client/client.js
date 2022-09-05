@@ -37,4 +37,5 @@ function Connect () {
   socket.on("new-pj", OnSocket_NewPj);
   socket.on("move", OnSocket_Move);
   socket.on("a-create-map" , OnSocket_MapCreated);
+  socket.on("a-teleport" , OnSocket_Teleport);
 }

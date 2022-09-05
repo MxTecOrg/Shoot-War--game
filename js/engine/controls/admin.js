@@ -3,6 +3,10 @@ function createAdminControls () {
   floatAdmin = new AdminControls();
   
   floatAdmin.addButton("Crear Mapa", createMapMenu);
+  
+  floatAdmin.addPrompt("Teletransporte" , "Inserte id o nombre del mapa: " , (text) => {
+      teleport(text);
+  });
 }
 
 

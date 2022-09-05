@@ -44,11 +44,14 @@ function OnLoop (delay) {
     if (watchX || watchY) {
       
       // rotación personaje
-      let radian = Math.atan2(watchX, watchY);
-      radian = - radian < 0 ? PI*2 - radian : - radian; // 0π comienza abajo en sentido de las manecillas
-      wp_sprite.rotation = radian + PI/2;
+      let deg = pj.a;
+      if (typeof deg == "undefined") {
+        deg = Math.atan2(watchX, watchY) * 180/PI;
+        deg = - deg < 0 ? 360 - deg : - deg; // 0deg comienza abajo en sentido de las manecillas
+      }
+      wp_sprite.angle = deg + 90;
     
-      if (radian > 0 && radian < PI) {
+      if (deg > 0 && deg < 180) {
         pj_sprite.scale.x = -1;
         wp_sprite.scale.y = -1;
       }
@@ -76,7 +79,7 @@ function OnLoop (delay) {
         // emitir al servidor
         if (delayEmit - Date.now() <= 0) {
           socket.emit("move", {
-            a: (radian * (180/PI)).toFixed(2),
+            a: deg.toFixed(2),
             x: player.x,
             y: player.y,
           });

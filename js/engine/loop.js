@@ -1,5 +1,7 @@
 /* (event) bucle del juego */
 PI = Math.PI;
+let delayEmit = Date.now();
+
 function OnLoop (delay) {
   
   // lógica de jugadores
@@ -7,12 +9,13 @@ function OnLoop (delay) {
     let pj = world.pjs[pj_id];
     let pj_sprite = pj.getChildByName("character"); //personaje
     let wp_sprite = pj.getChildByName("weapon"); //arma
+    let isPlayer = pj.id == player.id; // si es el jugador
    
     let watchX, watchY; //direccion en la que observa
    
-    // si el personaje es el jugador
-    if (pj.id == player.id) {
-      // joystick
+   
+    // JoyStick
+    if (isPlayer) {
       let jlX = joyLeft.x;
       let jlY = joyLeft.y;
       let jrX = joyRight.x;
@@ -22,15 +25,9 @@ function OnLoop (delay) {
   
       player.vx = player.speed * jlX;
       player.vy = player.speed * jlY;
-   
-      // seguimiento cámara
-      let tileGround = ground.tilePosition;
-      camera.x = - player.x + WIDTH / 2;
-      camera.y = - player.y + HEIGHT / 2;
-      tileGround.x = camera.x;
-      tileGround.y = camera.y;
     }
     else watchX = pj.vx, watchY = pj.vy;
+    
     
     // iniciar animación caminar
     if (pj.vx || pj.vy) {
@@ -42,7 +39,8 @@ function OnLoop (delay) {
     else if (pj_sprite.playing) pj_sprite.gotoAndStop(0);
     
     
-    // si el personaje está observando
+    
+    // si el personaje está observando o moviendose
     if (watchX || watchY) {
       
       // rotación personaje
@@ -72,6 +70,26 @@ function OnLoop (delay) {
       let collide = worldCollide(mx, my);
       if (!collide.x) pj.x = mx;
       if (!collide.y) pj.y = my;
+      
+      
+      if (isPlayer) {
+        // emitir al servidor
+        if (delayEmit - Date.now() <= 0) {
+          socket.emit("move", {
+            a: (radian * (180/PI)).toFixed(2),
+            x: player.x,
+            y: player.y,
+          });
+          delayEmit = Date.now() + 10;
+        }
+
+        // seguimiento cámara
+        let tileGround = ground.tilePosition;
+        camera.x = - player.x + WIDTH / 2;
+        camera.y = - player.y + HEIGHT / 2;
+        tileGround.x = camera.x;
+        tileGround.y = camera.y;
+      }
     }
   }
   

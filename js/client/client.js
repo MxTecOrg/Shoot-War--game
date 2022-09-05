@@ -1,6 +1,7 @@
 /* Socket conexión */
 app.script("js/client/user-data.js");
 app.script("js/client/map-data.js");
+app.script("js/client/move.js");
 
 function Connect () {
   loading.show("Conectando...");
@@ -9,7 +10,7 @@ function Connect () {
   });
   
   socket.onAny((event, data) => {
-    app.debug("ws->" + event, data);
+    if (event != "move") app.debug("ws->" + event, data);
   });
   
   socket.on("connect", data => {
@@ -32,4 +33,5 @@ function Connect () {
   
   socket.on("map-data", OnSocket_MapData);
   socket.on("user-data", OnSocket_UserData);
+  socket.on("move", OnSocket_Move);
 }

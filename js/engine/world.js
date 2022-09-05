@@ -12,7 +12,6 @@ class World {
     this.stage = opt.stage;
     this.pjs = {};
     this.terrain = {};
-   
   }
   
   destroy () {

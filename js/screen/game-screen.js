@@ -11,7 +11,7 @@ GameScreen.open = function () {
 
 /* 
   data => {
-    defaultTerrain: Textures[id],
+    defaultTerrain: Resources[id],
     size.x,
     size.y,
     
@@ -28,7 +28,7 @@ GameScreen.open = function () {
     terrain: {
       "x_y": {
         d: densidad
-        t: Textures[id]
+        t: Resources[id]
       }
     }
   }
@@ -40,7 +40,7 @@ function createGame (data) {
   layer1 = new Layer(gameLayer);
   layer2 = new Layer(gameLayer);
   
-  ground = new PIXI.TilingSprite(Textures[data.defaultTerrain], WIDTH, HEIGHT);
+  ground = new PIXI.TilingSprite(Resources[data.defaultTerrain].texture, WIDTH, HEIGHT);
   gameLayer.addChildAt(ground, 0);
   
   

@@ -7,7 +7,7 @@ function OnSocket_MapData (data) {
 }
 
 function OnSocket_NewPj (pj) {
-  pj = world.createPlayer(Textures[pj.t || "hero_male"].textures, {
+  pj = world.createPlayer(Resources[pj.t || "hero_male"].textures, {
     id: pj.id + "",
     nickname: pj.nickname,
     x: pj.x,
@@ -17,4 +17,12 @@ function OnSocket_NewPj (pj) {
     speed: pj.speed || 1
   });
   if (USER.nickname == pj.nickname) player = pj;
+}
+
+function OnSocket_RemovePj (id) {
+  let pj = world.pjs[id + ""];
+  if (pj) {
+    pj.destroy();
+    delete world.pjs[id + ""];
+  }
 }

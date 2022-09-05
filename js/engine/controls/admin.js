@@ -2,25 +2,7 @@
 function createAdminControls () {
   floatAdmin = new AdminControls();
   
-  /* boton */
-  floatAdmin.addButton("Crear Mapa", function(){
-    createMapMenu();
-  });
-  
-  /* toggle */
-  floatAdmin.addToggle("Palanca", true, function(on){
-    console.log("La palanca está en " + on);
-  });
-  
-  /* prompt */
-  floatAdmin.addPrompt("Input", "escriba algo", function(text){
-    console.log("introduciste: " + text);
-  });
-  
-  /* select */
-  floatAdmin.addSelect(["Ejemplo1", "Ejemplo2"], function(text){
-    console.log("seleccionaste " + text);
-  });
+  floatAdmin.addButton("Crear Mapa", createMapMenu);
 }
 
 
@@ -162,7 +144,7 @@ const createMapMenu = () => {
     menu.style.display = "flex";
     menu.style.flexDirection = "column";
     menu.style.alignItems = "center";
-    menu.style.justifyContent = "center"
+    menu.style.justifyContent = "center";
     menu.style.backgroundColor = "#313131";
     menu.style.color = "#cccccc";
     /* Prevent menu from closing on click */
@@ -257,9 +239,10 @@ const createMapMenu = () => {
     dterrainCont.appendChild(dterrainImg);
 
     for (let r in Resources) {
-        if(!r.includes("world")) continue;
+        const src = Resources[r].url;
+        if(!src.includes("world")) continue;
         const opt = document.createElement("option");
-        opt.innerText = r;
+        opt.innerText = src;
         dterrainInput.appendChild(opt);
     }
 

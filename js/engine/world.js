@@ -32,7 +32,7 @@ class World {
   setTerrain (terrain) {
     for (let tile in terrain) {
       let terr = terrain[tile];
-      let sprite = new Sprite(Textures[terr.t]);
+      let sprite = new Sprite(Resources[terr.t].texture);
       let [x, y] = tile.split("_");
     
       sprite.x = parseTile(parseFloat(x));
@@ -57,7 +57,7 @@ class World {
   createPlayer (textures, opt) {
     let cont = new Container();
     let pj = new AnimatedSprite(textures);
-    let wp = new Sprite(Resources["src/wps/mp5.png"].texture);
+    let wp = new Sprite(Resources.mp5.texture);
     let text = new Text(opt.nickname, {fontSize: scalePixel(10)});
     
     cont.addChild(text);

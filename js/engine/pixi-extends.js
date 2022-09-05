@@ -94,10 +94,12 @@ function OnLoadPIXI () {
 
   /* generar array de texturas */
   TextureList = class {
-    constructor (src) {
+    constructor (json_data) {
+      let src = json_data.textures;
       let list = [];
       for (let texture_id in src) list.push(src[texture_id]);
       this.textures = list;
+      this.url = json_data.url;
     }
 
     sortTextures (arr) {

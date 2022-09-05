@@ -36,5 +36,5 @@ function Connect () {
   socket.on("user-data", OnSocket_UserData);
   socket.on("new-pj", OnSocket_NewPj);
   socket.on("move", OnSocket_Move);
-  socket.on("a-create-map" , OnSocket_MapCreated)
+  socket.on("a-create-map" , OnSocket_MapCreated);
 }

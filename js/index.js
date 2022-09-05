@@ -45,12 +45,11 @@ function OnStart () {
   
   /* (pixi) cargar texturas */
   Loader
-    .add("src/pjs/hero_male_1.json")
-    .add("src/pjs/pj.png")
-    .add("src/world/ground.png")
-    .add("src/world/water.png")
-    .add("src/world/rock.png")
-    .add("src/wps/mp5.png")
+    .add("hero_male", "src/pjs/hero_male_1.json")
+    .add("mp5", "src/wps/mp5.png")
+    .add("g0", "src/world/ground.png")
+    .add("w0", "src/world/water.png")
+    .add("r0", "src/world/rock.png")
     .load(OnLoad);
 }
 
@@ -58,12 +57,7 @@ function OnStart () {
 /* (event) luego de cargar texturas */
 function OnLoad () {
   Loader.loaded = true;
-  Textures = {
-    "g0": Resources["src/world/ground.png"].texture,
-    "r0": Resources["src/world/rock.png"].texture,
-    "w0": Resources["src/world/water.png"].texture,
-    
-    "hero_male": new TextureList(Resources["src/pjs/hero_male_1.json"].textures)
-  };
+  Resources.hero_male =  new TextureList(Resources.hero_male);
+  
   ticker.stop();
 }

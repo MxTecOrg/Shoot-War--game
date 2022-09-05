@@ -13,7 +13,7 @@ function createAdminControls () {
   });
   
   /* prompt */
-  floatAdmin.addPrompt("Input", function(text){
+  floatAdmin.addPrompt("Input", "escriba algo", function(text){
     console.log("introduciste: " + text);
   });
 }
@@ -27,12 +27,15 @@ class AdminControls {
     let container = document.createElement("div");
     let float = document.createElement("div");
     let menu = document.createElement("div");
+    let icon = document.createElement("i");
     
     float.setAttribute("class", "float");
     container.setAttribute("class", "float--container");
     menu.setAttribute("class", "float--menu");
+    icon.setAttribute("class", "fa fa-cube");
     menu.active = false;
-   
+    
+    float.appendChild(icon);
     container.appendChild(float);
     container.appendChild(menu);
     document.body.appendChild(container);
@@ -42,6 +45,8 @@ class AdminControls {
       menu.style.display = menu.active ? "none":"flex"; 
       menu.active = !menu.active;
     };
+    float.ontouchstart = function () {float.style.filter = "opacity(.5)"};
+    float.ontouchend = function () {float.style.filter = "opacity(1)"};
     float.ontouchmove = function (event) {
       event = event.targetTouches[0];
       that.x = event.pageX;
@@ -66,9 +71,9 @@ class AdminControls {
   }
   
   //añadir boton con entrada de texto 
-  addPrompt (textContent, callback) {
+  addPrompt (textContent, placeholder, callback) {
     return this.addButton(textContent, function (event) {
-      callback(window.prompt(textContent), event);
+      callback(window.prompt(textContent + " >>> " + placeholder), event);
     });
   }
   

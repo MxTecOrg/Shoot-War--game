@@ -15,7 +15,7 @@ function OnStart () {
   
   /* cargar información de usuario */
   USER = app.loadData("user-data", {
-    token: btoa("" + Date.now()).replaceAll("=", "")
+    token: btoa("" + Date.now()).replace(/\=+/g, "")
   });
   USER.connected = false;
    

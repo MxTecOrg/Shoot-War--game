@@ -2,6 +2,7 @@
 app.script("js/client/user-data.js");
 app.script("js/client/map-data.js");
 app.script("js/client/move.js");
+app.script("js/client/admin.js");
 
 function Connect () {
   loading.show("Conectando...");
@@ -35,4 +36,5 @@ function Connect () {
   socket.on("user-data", OnSocket_UserData);
   socket.on("new-pj", OnSocket_NewPj);
   socket.on("move", OnSocket_Move);
+  socket.on("a-create-map" , OnSocket_MapCreated)
 }

@@ -60,8 +60,8 @@ function OnLoad () {
   Loader.loaded = true;
   Textures = {
     "g0": Resources["src/world/ground.png"].texture,
-    "rock": Resources["src/world/rock.png"].texture,
-    "water": Resources["src/world/water.png"].texture,
+    "r0": Resources["src/world/rock.png"].texture,
+    "w0": Resources["src/world/water.png"].texture,
     
     "hero_male": new TextureList(Resources["src/pjs/hero_male_1.json"].textures)
   };

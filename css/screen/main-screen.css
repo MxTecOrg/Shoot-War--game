@@ -1,8 +1,8 @@
 /* Layout de Menú */
 #main-screen {
-  z-index: 11;
+  z-index: 2;
   background-image: url("/src/main/bg-menu.png");
-  margin: 0px;
+  margin: 0;
   background-size: 100% 100%;
   
   display: flex;

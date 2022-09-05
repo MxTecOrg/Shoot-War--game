@@ -8,6 +8,7 @@ function OnLoadPIXI () {
   Textures = {},
   Rectangle = PIXI.Rectangle,
   Sprite = PIXI.Sprite,
+  Text = PIXI.Text,
   AnimatedSprite = PIXI.AnimatedSprite,
   ParticleContainer = PIXI.ParticleContainer;
 

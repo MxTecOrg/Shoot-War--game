@@ -16,6 +16,11 @@ function createAdminControls () {
   floatAdmin.addPrompt("Input", "escriba algo", function(text){
     console.log("introduciste: " + text);
   });
+  
+  /* select */
+  floatAdmin.addSelect(["Ejemplo1", "Ejemplo2"], function(text){
+    console.log("seleccionaste " + text);
+  });
 }
 
 
@@ -95,6 +100,25 @@ class AdminControls {
     
     updateToggle(on);
     return button;
+  }
+  
+  // añadir select
+  addSelect (list, callback) {
+    let select = document.createElement("select");
+    select.setAttribute("class", "float--menu-button");
+    
+    for (let item of list) {
+      let option = document.createElement("option");
+      option.innerText = item;
+      select.appendChild(option);
+      option = null;
+    }
+    
+    select.onchange = function () {
+      callback(select.value);
+    };
+    this.menu.appendChild(select);
+    return select;
   }
   
   // renderizar flotante

@@ -1,6 +1,6 @@
 /* Layout de Juego */
 #game-screen {
-  z-index: 10;
+  z-index: 1;
 }
 
 #game-view {

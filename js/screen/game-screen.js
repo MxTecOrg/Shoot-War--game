@@ -5,35 +5,67 @@ function GameScreen () {
 
 GameScreen.open = function () {
   Connect();
-  OnGame();
   document.getElementById("main-screen").style.display = "none";
 };
 
 
-function OnGame () {
+/* 
+  data => {
+    defaultTerrain: Textures[id],
+    size.x,
+    size.y,
+    
+    pjs: {
+      "id": {
+        id
+        pos.x,
+        pos.y,
+        pos.a
+      }
+    }
+    
+    objects: {}
+    terrain: {
+      "x_y": {
+        d: densidad
+        t: Textures[id]
+      }
+    }
+  }
+*/
+function createGame (data) {
   
   // capas del juego
   gameLayer = pixi.stage;
   layer1 = new Layer(gameLayer);
   layer2 = new Layer(gameLayer);
-  ground = new PIXI.TilingSprite(Textures.g0, WIDTH, HEIGHT);
+  
+  ground = new PIXI.TilingSprite(Textures[data.defaultTerrain], WIDTH, HEIGHT);
   gameLayer.addChildAt(ground, 0);
   
   
   world = new World({ 
     // datos del mundo
-    w: 50,
-    h: 50,
+    w: data.size.x,
+    h: data.size.y,
     stage: layer1
   });
   
-  player = world.createPlayer(Textures.hero_male.textures, {
-    x: 0,
-    y: 0,
-    w: parseTile(1),
-    h: parseTile(1),
-    speed: 1
-  });
+  world.setTerrain(data.terrain);
+  
+  for (let id in data.pjs) {
+    let pjs = data.pjs[id];
+    pjs = world.createPlayer(Textures[pjs.t || "hero_male"].textures, {
+      id: pjs.id + "",
+      nickname: pjs.nickname,
+      x: pjs.x,
+      y: pjs.y,
+      w: parseTile(1),
+      h: parseTile(1),
+      speed: pjs.speed || 1
+    });
+    if (USER.nickname == pjs.nickname) player = pjs;
+  }
   
   camera = new Camera(layer1, {w:world.width, h:world.height});
   

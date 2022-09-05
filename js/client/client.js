@@ -1,5 +1,7 @@
 /* Socket conexión */
- 
+app.script("js/client/user-data.js");
+app.script("js/client/map-data.js");
+
 function Connect () {
   loading.show("Conectando...");
   socket = io.connect(SERVER_URL, {
@@ -28,10 +30,6 @@ function Connect () {
     USER.connected = true;
   });
   
-  socket.on("user-data", data => {
-    USER = Object.assign(USER, data);
-    app.saveData("user-data", USER);
-    
-    if (USER.acclevel > 1) createAdminControls();
-  });
+  socket.on("map-data", OnSocket_MapData);
+  socket.on("user-data", OnSocket_UserData);
 }

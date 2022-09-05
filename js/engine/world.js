@@ -1,4 +1,8 @@
-let idPlayer = 0;
+
+
+function scalePixel (px) {return px * PIXEL_RATIO}
+function parseTile (tile) {return tile * TILE_RATIO}
+function toTile (px) {return Math.floor(px / TILE_RATIO)}
 
 
 class World {
@@ -8,10 +12,6 @@ class World {
     this.stage = opt.stage;
     this.pjs = {};
     this.terrain = {};
-    this.texture_pack = {
-      water: Resources["src/world/water.png"].texture,
-      rock: Resources["src/world/rock.png"].texture
-    };
    
   }
   
@@ -33,7 +33,7 @@ class World {
   setTerrain (terrain) {
     for (let tile in terrain) {
       let terr = terrain[tile];
-      let sprite = new Sprite(this.texture_pack[terr.t]);
+      let sprite = new Sprite(Textures[terr.t]);
       let [x, y] = tile.split("_");
     
       sprite.x = parseTile(parseFloat(x));
@@ -49,15 +49,23 @@ class World {
   
   // jugador 
   // textures Array[PIXI.Texture]
-  // opt {x, y, w, h}
+  /* opt => {
+      x, y, w, h //ya escalados
+      nickname,
+      id 
+    }
+  */
   createPlayer (textures, opt) {
     let cont = new Container();
     let pj = new AnimatedSprite(textures);
     let wp = new Sprite(Resources["src/wps/mp5.png"].texture);
-  
+    let text = new Text(opt.nickname, {fontSize: scalePixel(10)});
+    
+    cont.addChild(text);
     cont.addChild(pj);
     cont.addChild(wp);
-  
+    
+    
     // sprite personaje 
     pj.name = "character";
     pj.anchor.set(0.5, 0.5);
@@ -68,6 +76,11 @@ class World {
     pj.x = pj.width / 2;
     pj.y = pj.height / 2;
     pj.animationSpeed = 0.1;
+    
+    // nombre del personaje
+    text.anchor.x = 0.5;
+    text.x = pj.width / 2;
+    text.y = - text.height;
   
     // sprite arma
     wp.name = "weapon";
@@ -86,11 +99,12 @@ class World {
     cont.vx = 0;
     cont.vy = 0;
     cont.anchor.set(0.5, 0.5);
-    cont.id = idPlayer + "";
+    cont.id = opt.id + "";
+    cont.nickname = opt.nickname;
+    
   
     this.pjs[cont.id] = cont;
     this.stage.addChild(cont);
-    idPlayer ++;
 
     return cont;
   }
@@ -103,7 +117,3 @@ function worldCollide (x, y) {
   if (y < 0 || y > world.height) collide.y = true;
   return collide;
 }
-
-function scalePixel (px) {return px * PIXEL_RATIO}
-function parseTile (tile) {return tile * TILE_RATIO}
-function toTile (px) {return Math.floor(px / TILE_RATIO)}

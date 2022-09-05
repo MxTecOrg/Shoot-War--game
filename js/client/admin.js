@@ -1,9 +1,9 @@
 const OnSocket_MapCreated = (data) => {
-    if(data == true) app.Alert("Se creo el mapa");
-    else app.Alert("Ocurrio un error al crear el mapa.");   
+    if(data == true) alert("Se creo el mapa");
+    else alert("Ocurrio un error al crear el mapa.");   
 }
 
 const OnSocket_Teleport = (data) => {
-    if(data == true) app.Alert("Se teletransportó correctamente");
-    else app.Alert("Ocurrio un error al teletransportar.");   
+    if(data == true) alert("Se teletransportó correctamente");
+    else alert("Ocurrio un error al teletransportar.");   
 }

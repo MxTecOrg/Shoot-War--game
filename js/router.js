@@ -21,7 +21,8 @@ app.script("js/client/client.js");
 
 app.script("js/screen/main-screen.js");
 app.script("js/screen/game-screen.js");
-app.script("js/engine/loop.js");
+app.script("js/engine/logic-loop.js");
+app.script("js/engine/render-loop.js");
 
 app.script("js/engine/world.js");
 app.script("js/engine/controls/joystick.js");

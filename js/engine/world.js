@@ -1,8 +1,15 @@
 
 
 function scalePixel (px) {return px * PIXEL_RATIO}
+function removeScalePixel (px) {return px / PIXEL_RATIO}
 function parseTile (tile) {return tile * TILE_RATIO}
 function toTile (px) {return Math.floor(px / TILE_RATIO)}
+function degToPos (deg, radius) {
+  return {
+    x: Math.cos(deg) * radius,
+    y: Math.sin(deg) * radius,
+  }
+}
 
 
 class World {
@@ -97,6 +104,7 @@ class World {
     cont.y = opt.y;
     cont.vx = 0;
     cont.vy = 0;
+    cont.a = 0;
     cont.anchor.set(0.5, 0.5);
     cont.id = opt.id + "";
     cont.nickname = opt.nickname;

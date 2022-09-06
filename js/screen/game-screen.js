@@ -68,7 +68,8 @@ function createGame (data) {
   boxDebug.y = 0;
   layer2.addChild(boxDebug);
   
-  // bucle
-  ticker.add(OnLoop);
+  // bucles
+  ticker.add(OnRenderLoop);
+  window.setInterval(OnLogicLoop, 1000/LOGIC_FPS);
   ticker.start();
 }

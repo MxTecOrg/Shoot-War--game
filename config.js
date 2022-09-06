@@ -10,6 +10,7 @@ FORCE_CANVAS = true; // usar CanvasRenderer
 GAME_SCREEN_SIZE = 600; // tamaño de juego
 TILE_SIZE = 50; // tamaño de tile
 
+LOGIC_FPS = 30;
 
 // el engine alterará estos valores, 
 // cualquier cambio a ellos no será relevante
